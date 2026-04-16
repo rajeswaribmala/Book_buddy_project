@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+        body {
+            background-image: url("{% static 'images/open-book.webp' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+      
+    </style>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <h2>Search Results for "{{ query }}"</h2>
+    </div>
+
+    {% if books %}
+        <table class="book-table" style="margin: 0 auto; border-collapse: collapse; width: 90%;">
+            <thead>
+                <tr style="background-color: #f2f2f2;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Title</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Author</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Description</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Published</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ book.title }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ book.author }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ book.description }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ book.published_date }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">
+                        {% if book.pdf %}
+                            <a href="{{ book.pdf.url }}" class="btn" download>📥 Download</a>
+                        {% else %}
+                            <span class="btn disabled">No PDF</span>
+                        {% endif %}
+
+                        {% if user == book.user %}
+                            <a href="{% url 'edit_book' book.id %}" class="btn">✏️ Edit</a>
+                            <a href="{% url 'delete_book' book.id %}" class="btn" onclick="return confirm('Are you sure?');">🗑 Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p style="text-align: center; margin-top: 50px;">No books found for "{{ query }}".</p>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'home' %}" class="btn">🔙 Back to Home</a>
+    </div>
+{% endblock %}

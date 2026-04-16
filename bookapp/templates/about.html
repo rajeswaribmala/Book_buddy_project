@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background-image: url("{% static 'images/about.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: black;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .about-container {
+        max-width: 900px;
+        margin: 60px auto;
+        background: rgba(252, 250, 250, 0.747);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px #fff;
+    }
+
+    .about-container h1 {
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    .about-container p {
+        font-size: 18px;
+        line-height: 1.8;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="about-container">
+    <h1>About BookBuddy 📚</h1>
+    <p><strong>BookBuddy</strong> is your personalized online bookshelf, designed to help you store, organize, and share your favorite books in one secure place.</p>
+    <p>You can easily add your books with descriptions, authors, and PDF uploads. Other users can view and download your books, but only you can edit or delete them.</p>
+    <p>Whether you're a student, a writer, or a book lover — BookBuddy lets you maintain your digital library from anywhere.</p>
+    <p>Join us, start uploading your collection, and discover books from fellow readers too!</p>
+</div>
+{% endblock %}
